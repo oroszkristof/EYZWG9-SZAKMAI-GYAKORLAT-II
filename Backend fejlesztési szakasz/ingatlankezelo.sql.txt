@@ -1,0 +1,107 @@
+CREATE DATABASE ingatlankezelo;
+USE ingatlankezelo;
+
+
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nev VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    jelszo VARCHAR(255) NOT NULL,
+    szerepkor VARCHAR(50) NOT NULL,
+    telefonszam VARCHAR(30),
+    letrehozasdatum DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE ingatlanok (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tulajdonosid INT NOT NULL,
+    cim VARCHAR(255) NOT NULL,
+    tipus VARCHAR(100),
+    szobakszama INT,
+    haviar DECIMAL(10,2),
+    leiras TEXT,
+
+    CONSTRAINT fk_ingatlan_tulajdonos
+    FOREIGN KEY (tulajdonosid)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+
+CREATE TABLE berlok (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userid INT NOT NULL UNIQUE,
+    nev VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    telefonszam VARCHAR(30),
+    szemelyiszam VARCHAR(50),
+    lakcim VARCHAR(255),
+
+    CONSTRAINT fk_berlo_user
+    FOREIGN KEY (userid)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+
+CREATE TABLE szerzodesek (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ingatlanid INT NOT NULL,
+    berloid INT NOT NULL,
+    kezdetdatum DATE NOT NULL,
+    vegdatum DATE NOT NULL,
+    havidij DECIMAL(10,2),
+    statusz VARCHAR(50),
+
+    CONSTRAINT fk_szerzodes_ingatlan
+    FOREIGN KEY (ingatlanid)
+    REFERENCES ingatlanok(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+
+    CONSTRAINT fk_szerzodes_berlo
+    FOREIGN KEY (berloid)
+    REFERENCES berlok(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+
+CREATE TABLE fizetesek (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    szerzodesid INT NOT NULL,
+    osszeg DECIMAL(10,2) NOT NULL,
+    fizetesdatum DATE NOT NULL,
+    statusz VARCHAR(50),
+    fizetesmod VARCHAR(50),
+    megjegyzes TEXT,
+
+    CONSTRAINT fk_fizetes_szerzodes
+    FOREIGN KEY (szerzodesid)
+    REFERENCES szerzodesek(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+CREATE TABLE uzenetek (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kuldoid INT NOT NULL,
+    targy VARCHAR(255),
+    uzenet TEXT NOT NULL,
+    kuldesdatum DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_uzenet_kuldo
+    FOREIGN KEY (kuldoid)
+    REFERENCES berlok(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
