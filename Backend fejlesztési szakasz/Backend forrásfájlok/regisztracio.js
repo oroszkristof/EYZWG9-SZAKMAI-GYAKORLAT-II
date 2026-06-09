@@ -10,7 +10,9 @@ router.post("/", async (req, res) => {
         email,
         jelszo,
         szerepkor,
-        telefonszam
+        telefonszam,
+        szemelyiszam,
+        lakcim
     } = req.body;
 
     let conn;
@@ -28,39 +30,53 @@ router.post("/", async (req, res) => {
 
             return res.json({
                 siker: false,
-                uzenet: "Ez az email mar letezik!"
+                uzenet: "Ez az email már létezik!"
             });
 
         }
 
         await conn.query(
             `INSERT INTO users
-            (nev, email, jelszo, szerepkor, telefonszam)
-            VALUES (?, ?, ?, ?, ?)`,
+            (
+                nev,
+                email,
+                jelszo,
+                szerepkor,
+                telefonszam,
+                szemelyiszam,
+                lakcim
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
             [
                 nev,
                 email,
                 jelszo,
                 szerepkor,
-                telefonszam
+                telefonszam,
+                szemelyiszam,
+                lakcim
             ]
         );
 
         res.json({
             siker: true,
-            uzenet: "Sikeres regisztracio!"
+            uzenet: "Sikeres regisztráció!"
         });
 
     } catch (err) {
 
+        console.error(err);
+
         res.status(500).json({
             siker: false,
-            hiba: err
+            uzenet: "Szerverhiba történt!"
         });
 
     } finally {
 
-        if (conn) conn.release();
+        if (conn) {
+            conn.release();
+        }
 
     }
 

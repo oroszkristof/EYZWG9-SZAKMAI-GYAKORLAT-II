@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
 
         res.json({
             siker: true,
-            uzenet: "Ingatlan sikeresen letrehozva!"
+            uzenet: "Ingatlan sikeresen létrehozva!"
         });
 
     } catch (err) {

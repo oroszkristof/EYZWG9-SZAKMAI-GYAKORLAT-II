@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
 
             return res.json({
                 siker: false,
-                uzenet: "Hibas email vagy jelszo!"
+                uzenet: "Hibás email vagy jelszó!"
             });
 
         }
@@ -34,25 +34,34 @@ router.post("/", async (req, res) => {
 
         res.json({
             siker: true,
-            uzenet: "Sikeres bejelentkezes!",
+            uzenet: "Sikeres bejelentkezés!",
             user: {
                 id: user.id,
                 nev: user.nev,
                 email: user.email,
-                szerepkor: user.szerepkor
+                jelszo: user.jelszo,
+                szerepkor: user.szerepkor,
+                telefonszam: user.telefonszam,
+                szemelyiszam: user.szemelyiszam,
+                lakcim: user.lakcim,
+                letrehozasdatum: user.letrehozasdatum
             }
         });
 
     } catch (err) {
 
+        console.error(err);
+
         res.status(500).json({
             siker: false,
-            hiba: err
+            uzenet: "Szerverhiba történt!"
         });
 
     } finally {
 
-        if (conn) conn.release();
+        if (conn) {
+            conn.release();
+        }
 
     }
 

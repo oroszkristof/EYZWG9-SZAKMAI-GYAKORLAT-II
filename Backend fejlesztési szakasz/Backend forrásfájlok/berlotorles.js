@@ -12,22 +12,29 @@ router.delete("/:id", async (req, res) => {
         conn = await pool.getConnection();
 
         await conn.query(
-            "DELETE FROM berlok WHERE id = ?",
+            "DELETE FROM users WHERE id = ?",
             [req.params.id]
         );
 
         res.json({
             siker: true,
-            uzenet: "Berlo torolve!"
+            uzenet: "Bérlő törölve!"
         });
 
     } catch (err) {
 
-        res.status(500).json(err);
+        console.error(err);
+
+        res.status(500).json({
+            siker: false,
+            uzenet: "Hiba történt!"
+        });
 
     } finally {
 
-        if(conn) conn.release();
+        if (conn) {
+            conn.release();
+        }
 
     }
 

@@ -20,13 +20,13 @@ router.put("/:id", async (req, res) => {
         conn = await pool.getConnection();
 
         await conn.query(
-            `UPDATE berlok
+            `UPDATE users
             SET
-            nev = ?,
-            email = ?,
-            telefonszam = ?,
-            szemelyiszam = ?,
-            lakcim = ?
+                nev = ?,
+                email = ?,
+                telefonszam = ?,
+                szemelyiszam = ?,
+                lakcim = ?
             WHERE id = ?`,
             [
                 nev,
@@ -40,16 +40,23 @@ router.put("/:id", async (req, res) => {
 
         res.json({
             siker: true,
-            uzenet: "Berlo modositva!"
+            uzenet: "Bérlő módosítva!"
         });
 
     } catch (err) {
 
-        res.status(500).json(err);
+        console.error(err);
+
+        res.status(500).json({
+            siker: false,
+            uzenet: "Hiba történt!"
+        });
 
     } finally {
 
-        if(conn) conn.release();
+        if (conn) {
+            conn.release();
+        }
 
     }
 

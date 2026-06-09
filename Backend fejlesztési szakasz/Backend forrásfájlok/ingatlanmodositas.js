@@ -40,7 +40,7 @@ router.put("/:id", async (req, res) => {
 
         res.json({
             siker: true,
-            uzenet: "Ingatlan modositva!"
+            uzenet: "Ingatlan módosítva!"
         });
 
     } catch (err) {
