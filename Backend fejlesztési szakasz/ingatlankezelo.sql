@@ -134,17 +134,6 @@ INSERT INTO berlok (userid, nev, email, telefonszam, szemelyiszam, lakcim) VALUE
 (11,'Papp Renáta','renata.papp@gmail.com','06307654321','II901234','Kecskemét'),
 (12,'Biró Zoltán','zoltan.biro@gmail.com','06302345678','JJ012345','Székesfehérvár');
 
-INSERT INTO ingatlanok (tulajdonosid, cim, tipus, szobakszama, haviar, leiras) VALUES
-(1,'Budapest, Kossuth utca 12.','Panel',2,150000,'Felújított panel lakás'),
-(1,'Budapest, Petőfi utca 8.','Társasház',3,180000,'Belvárosi lakás'),
-(1,'Debrecen, Fő utca 21.','Ház',4,220000,'Családi ház'),
-(1,'Nyíregyháza, Sóstó utca 4.','Ház',5,250000,'Kertes ingatlan'),
-(1,'Miskolc, Arany János utca 7.','Panel',2,140000,'Jó állapotú lakás'),
-(2,'Szeged, Tisza utca 15.','Garzon',1,120000,'Belvárosi garzon'),
-(2,'Pécs, Rákóczi utca 3.','Társasház',2,160000,'Felújított lakás'),
-(2,'Győr, Bartók Béla utca 10.','Ház',4,210000,'Nagy családi ház'),
-(2,'Kecskemét, Dózsa György út 5.','Panel',2,145000,'Központi elhelyezkedés'),
-(2,'Eger, Vár utca 11.','Társasház',3,170000,'Újszerű ingatlan');
 
 INSERT INTO szerzodesek
 (ingatlanid, berloid, kezdetdatum, vegdatum, havidij, statusz)
