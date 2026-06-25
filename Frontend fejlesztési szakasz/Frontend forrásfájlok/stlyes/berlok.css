@@ -1,0 +1,122 @@
+.tenant-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tenant-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.add-btn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-btn:hover {
+    background-color: #0056b3;
+}
+
+.tenant-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
+
+.tenant-form input,
+.tenant-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.tenant-form button {
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tenant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 20px;
+}
+
+.tenant-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.12);
+    transition: 0.3s;
+}
+
+.tenant-card:hover {
+    transform: translateY(-5px);
+}
+
+.tenant-card h3 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.tenant-card p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.edit-btn {
+    flex: 1;
+    background: orange;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete-btn {
+    flex: 1;
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.assign-btn {
+    flex: 1;
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
