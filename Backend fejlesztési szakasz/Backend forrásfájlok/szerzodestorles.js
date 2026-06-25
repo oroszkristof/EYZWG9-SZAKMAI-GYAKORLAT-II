@@ -18,7 +18,7 @@ router.delete("/:id", async (req, res) => {
 
         res.json({
             siker: true,
-            uzenet: "Szerzodes torolve!"
+            uzenet: "Szerződés törölve!"
         });
 
     } catch (err) {

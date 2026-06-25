@@ -37,7 +37,7 @@ router.put("/:id", async (req, res) => {
 
         res.json({
             siker: true,
-            uzenet: "Szerzodes modositva!"
+            uzenet: "Szerződés módosítva!"
         });
 
     } catch (err) {
