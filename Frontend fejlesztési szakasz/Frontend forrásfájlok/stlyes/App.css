@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: black;
+    padding: 12px 20px;
+
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    color: yellow;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+nav {
+    margin-left: auto; /* jobbra tolja a menüt */
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: yellow;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+p {
+    text-align: center;
+}
+.logout-btn {
+
+    background: none;
+    border: none;
+
+    color: yellow;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+.logout-btn:hover {
+
+    color: white;
+
+}
+
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: calc(100vh - 100px);
+    padding: 40px 60px;
+    gap: 50px;
+}
+
+.hero-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hero-left h1 {
+    font-size: 48px;
+    margin-bottom: 25px;
+    color: #000;
+}
+
+.hero-left p {
+    font-size: 20px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.hero-button {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.hero-button:hover {
+    background-color: #1d4ed8;
+}
+
+.hero-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-right img {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+}
+
+
+@media (max-width: 900px) {
+
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .hero-left h1 {
+        font-size: 36px;
+    }
+
+    .hero-left p {
+        font-size: 18px;
+    }
+
+    .hero-right img {
+        max-width: 100%;
+    }
+
+}
