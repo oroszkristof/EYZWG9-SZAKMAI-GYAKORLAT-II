@@ -3,110 +3,110 @@ import "../styles/berlok.css";
 
 function Berlok() {
 
-const [berlok, setBerlok] = useState([]);
+    const [berlok, setBerlok] = useState([]);
 
-const berlokBetoltese = async () => {
+    const berlokBetoltese = async () => {
 
-    try {
+        try {
 
-        const response = await fetch(
-            "http://localhost:3001/api/berlolistazas"
-        );
+            const response = await fetch(
+                "http://localhost:3001/api/berlolistazas"
+            );
 
-        const data = await response.json();
+            const data = await response.json();
 
-        setBerlok(
-            Array.isArray(data)
-                ? data
-                : []
-        );
+            setBerlok(
+                Array.isArray(data)
+                    ? data
+                    : []
+            );
 
-    } catch (error) {
+        } catch (error) {
 
-        console.error(error);
+            console.error(error);
 
-        alert(
-            "Nem sikerült betölteni a bérlőket!"
-        );
+            alert(
+                "Nem sikerült betölteni a bérlőket!"
+            );
 
-    }
+        }
 
-};
+    };
 
-useEffect(() => {
+    useEffect(() => {
 
-    berlokBetoltese();
+        berlokBetoltese();
 
-}, []);
+    }, []);
 
-return (
+    return (
 
-    <div className="tenant-container">
+        <div className="tenant-container">
 
-        <h1>Bérlők</h1>
+            <h1>Bérlők</h1>
 
-        <div className="tenant-grid">
+            <div className="tenant-grid">
 
-            {berlok.map((berlo) => (
+                {berlok.map((berlo) => (
 
-                <div
-                    key={berlo.id}
-                    className="tenant-card"
-                >
+                    <div
+                        key={berlo.id}
+                        className="tenant-card"
+                    >
 
-                    <h3>
-                        {berlo.nev}
-                    </h3>
+                        <h3>
+                            {berlo.nev}
+                        </h3>
 
-                    <p>
-                        <strong>
-                            E-mail:
-                        </strong>{" "}
-                        {
-                            berlo.email ||
-                            "Nincs megadva"
-                        }
-                    </p>
+                        <p>
+                            <strong>
+                                E-mail:
+                            </strong>{" "}
+                            {
+                                berlo.email ||
+                                "Nincs megadva"
+                            }
+                        </p>
 
-                    <p>
-                        <strong>
-                            Telefonszám:
-                        </strong>{" "}
-                        {
-                            berlo.telefonszam ||
-                            "Nincs megadva"
-                        }
-                    </p>
+                        <p>
+                            <strong>
+                                Telefonszám:
+                            </strong>{" "}
+                            {
+                                berlo.telefonszam ||
+                                "Nincs megadva"
+                            }
+                        </p>
 
-                    <p>
-                        <strong>
-                            Személyi szám:
-                        </strong>{" "}
-                        {
-                            berlo.szemelyiszam ||
-                            "Nincs megadva"
-                        }
-                    </p>
+                        <p>
+                            <strong>
+                                Személyi szám:
+                            </strong>{" "}
+                            {
+                                berlo.szemelyiszam ||
+                                "Nincs megadva"
+                            }
+                        </p>
 
-                    <p>
-                        <strong>
-                            Lakcím:
-                        </strong>{" "}
-                        {
-                            berlo.lakcim ||
-                            "Nincs megadva"
-                        }
-                    </p>
+                        <p>
+                            <strong>
+                                Lakcím:
+                            </strong>{" "}
+                            {
+                                berlo.lakcim ||
+                                "Nincs megadva"
+                            }
+                        </p>
 
-                </div>
+                    </div>
 
-            ))}
+                ))}
+
+            </div>
 
         </div>
 
-    </div>
-
-);
+    );
 
 
 }

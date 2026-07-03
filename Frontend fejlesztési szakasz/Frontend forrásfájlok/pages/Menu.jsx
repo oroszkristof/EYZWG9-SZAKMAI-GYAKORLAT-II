@@ -25,42 +25,48 @@ function Menu() {
 
             <nav>
 
-                <Link to="/ingatlanok">
-                    Ingatlanok
-                </Link>
-
-                <Link to="/berlok">
-                    Bérlők
-                </Link>
-
-                <Link to="/szerzodesek">
-                    Szerződések
-                </Link>
-
-                <Link to="/fizetesek">
-                    Fizetések
-                </Link>
-
-                <Link to="/profil">
-                    Profil
-                </Link>
-
-                {!user && (
+                {!user ? (
 
                     <Link to="/bejelentkezes">
                         Bejelentkezés
                     </Link>
 
-                )}
+                ) : (
 
-                {user && (
+                    <>
 
-                    <button
-                        onClick={kijelentkezes}
-                        className="logout-btn"
-                    >
-                        Kijelentkezés
-                    </button>
+                        <Link to="/ingatlanok">
+                            Ingatlanok
+                        </Link>
+
+                        {user.szerepkor === "admin" && (
+
+                            <Link to="/berlok">
+                                Bérlők
+                            </Link>
+
+                        )}
+
+                        <Link to="/szerzodesek">
+                            Szerződések
+                        </Link>
+
+                        <Link to="/fizetesek">
+                            Fizetések
+                        </Link>
+
+                        <Link to="/profil">
+                            Profil
+                        </Link>
+
+                        <button
+                            onClick={kijelentkezes}
+                            className="logout-btn"
+                        >
+                            Kijelentkezés
+                        </button>
+
+                    </>
 
                 )}
 

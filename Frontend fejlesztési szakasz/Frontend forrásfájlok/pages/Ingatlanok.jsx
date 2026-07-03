@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "../styles/ingatlanok.css";
 
 function Ingatlanok() {
+    const user =
+        JSON.parse(localStorage.getItem("user"));
 
     const [ingatlanok, setIngatlanok] = useState([]);
 
@@ -176,125 +178,130 @@ function Ingatlanok() {
 
             <h1>Ingatlanok</h1>
 
-            <button
-                className="uj-btn"
-                onClick={() =>
-                    setUrlapLathato(
-                        !urlapLathato
-                    )
-                }
-            >
-                {
-                    urlapLathato
-                        ? "Űrlap bezárása"
-                        : "Új ingatlan felvétele"
-                }
-            </button>
+            {user?.szerepkor === "admin" && (
 
-            {urlapLathato && (
-
-                <form
-                    className="ingatlan-form"
-                    onSubmit={letrehozas}
+                <button
+                    className="uj-btn"
+                    onClick={() =>
+                        setUrlapLathato(
+                            !urlapLathato
+                        )
+                    }
                 >
-
-                    <input
-                        type="number"
-                        placeholder="Tulajdonos ID"
-                        value={
-                            ujIngatlan.tulajdonosid
-                        }
-                        onChange={(e) =>
-                            setUjIngatlan({
-                                ...ujIngatlan,
-                                tulajdonosid:
-                                    e.target.value
-                            })
-                        }
-                    />
-
-                    <input
-                        type="text"
-                        placeholder="Cím"
-                        value={ujIngatlan.cim}
-                        onChange={(e) =>
-                            setUjIngatlan({
-                                ...ujIngatlan,
-                                cim: e.target.value
-                            })
-                        }
-                    />
-
-                    <input
-                        type="text"
-                        placeholder="Típus"
-                        value={ujIngatlan.tipus}
-                        onChange={(e) =>
-                            setUjIngatlan({
-                                ...ujIngatlan,
-                                tipus:
-                                    e.target.value
-                            })
-                        }
-                    />
-
-                    <input
-                        type="number"
-                        placeholder="Szobák száma"
-                        value={
-                            ujIngatlan.szobakszama
-                        }
-                        onChange={(e) =>
-                            setUjIngatlan({
-                                ...ujIngatlan,
-                                szobakszama:
-                                    e.target.value
-                            })
-                        }
-                    />
-
-                    <input
-                        type="number"
-                        placeholder="Havi ár"
-                        value={
-                            ujIngatlan.haviar
-                        }
-                        onChange={(e) =>
-                            setUjIngatlan({
-                                ...ujIngatlan,
-                                haviar:
-                                    e.target.value
-                            })
-                        }
-                    />
-
-                    <textarea
-                        placeholder="Leírás"
-                        value={
-                            ujIngatlan.leiras
-                        }
-                        onChange={(e) =>
-                            setUjIngatlan({
-                                ...ujIngatlan,
-                                leiras:
-                                    e.target.value
-                            })
-                        }
-                    />
-
-                    <button type="submit">
-
-                        {
-                            szerkesztettIngatlan
-                                ? "Módosítás mentése"
-                                : "Új ingatlan felvétele"
-                        }
-
-                    </button>
-
-                </form>
+                    {
+                        urlapLathato
+                            ? "Űrlap bezárása"
+                            : "Új ingatlan felvétele"
+                    }
+                </button>
 
             )}
+
+            {user?.szerepkor === "admin" &&
+                urlapLathato && (
+
+                    <form
+                        className="ingatlan-form"
+                        onSubmit={letrehozas}
+                    >
+
+                        <input
+                            type="number"
+                            placeholder="Tulajdonos ID"
+                            value={
+                                ujIngatlan.tulajdonosid
+                            }
+                            onChange={(e) =>
+                                setUjIngatlan({
+                                    ...ujIngatlan,
+                                    tulajdonosid:
+                                        e.target.value
+                                })
+                            }
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Cím"
+                            value={ujIngatlan.cim}
+                            onChange={(e) =>
+                                setUjIngatlan({
+                                    ...ujIngatlan,
+                                    cim: e.target.value
+                                })
+                            }
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Típus"
+                            value={ujIngatlan.tipus}
+                            onChange={(e) =>
+                                setUjIngatlan({
+                                    ...ujIngatlan,
+                                    tipus:
+                                        e.target.value
+                                })
+                            }
+                        />
+
+                        <input
+                            type="number"
+                            placeholder="Szobák száma"
+                            value={
+                                ujIngatlan.szobakszama
+                            }
+                            onChange={(e) =>
+                                setUjIngatlan({
+                                    ...ujIngatlan,
+                                    szobakszama:
+                                        e.target.value
+                                })
+                            }
+                        />
+
+                        <input
+                            type="number"
+                            placeholder="Havi ár"
+                            value={
+                                ujIngatlan.haviar
+                            }
+                            onChange={(e) =>
+                                setUjIngatlan({
+                                    ...ujIngatlan,
+                                    haviar:
+                                        e.target.value
+                                })
+                            }
+                        />
+
+                        <textarea
+                            placeholder="Leírás"
+                            value={
+                                ujIngatlan.leiras
+                            }
+                            onChange={(e) =>
+                                setUjIngatlan({
+                                    ...ujIngatlan,
+                                    leiras:
+                                        e.target.value
+                                })
+                            }
+                        />
+
+                        <button type="submit">
+
+                            {
+                                szerkesztettIngatlan
+                                    ? "Módosítás mentése"
+                                    : "Új ingatlan felvétele"
+                            }
+
+                        </button>
+
+                    </form>
+
+                )}
 
             <div className="ingatlan-grid">
 
@@ -338,31 +345,35 @@ function Ingatlanok() {
                             {ingatlan.leiras}
                         </p>
 
-                        <div className="gombok">
+                        {user?.szerepkor === "admin" && (
 
-                            <button
-                                className="modositas-btn"
-                                onClick={() =>
-                                    szerkesztes(
-                                        ingatlan
-                                    )
-                                }
-                            >
-                                Módosítás
-                            </button>
+                            <div className="gombok">
 
-                            <button
-                                className="torles-btn"
-                                onClick={() =>
-                                    torles(
-                                        ingatlan.id
-                                    )
-                                }
-                            >
-                                Törlés
-                            </button>
+                                <button
+                                    className="modositas-btn"
+                                    onClick={() =>
+                                        szerkesztes(
+                                            ingatlan
+                                        )
+                                    }
+                                >
+                                    Módosítás
+                                </button>
 
-                        </div>
+                                <button
+                                    className="torles-btn"
+                                    onClick={() =>
+                                        torles(
+                                            ingatlan.id
+                                        )
+                                    }
+                                >
+                                    Törlés
+                                </button>
+
+                            </div>
+
+                        )}
 
                     </div>
 

@@ -3,6 +3,9 @@ import "../styles/fizetesek.css";
 
 function Fizetesek() {
 
+    const user =
+        JSON.parse(localStorage.getItem("user"));
+
     const [fizetesek, setFizetesek] = useState([]);
     const [szerzodesek, setSzerzodesek] = useState([]);
     const [szerkesztettId, setSzerkesztettId] = useState(null);
@@ -166,151 +169,153 @@ function Fizetesek() {
 
             <h1>Fizetések</h1>
 
-            <form
-                className="tenant-form"
-                onSubmit={mentes}
-            >
+            {user?.szerepkor === "admin" && (
 
-                <select
-                    value={
-                        ujFizetes.szerzodesid
-                    }
-                    onChange={(e) =>
-                        setUjFizetes({
-                            ...ujFizetes,
-                            szerzodesid:
-                                e.target.value
-                        })
-                    }
-                    required
+                <form
+                    className="tenant-form"
+                    onSubmit={mentes}
                 >
 
-                    <option value="">
-                        Válassz szerződést
-                    </option>
+                    <select
+                        value={
+                            ujFizetes.szerzodesid
+                        }
+                        onChange={(e) =>
+                            setUjFizetes({
+                                ...ujFizetes,
+                                szerzodesid:
+                                    e.target.value
+                            })
+                        }
+                        required
+                    >
 
-                    {szerzodesek.map(
-                        (szerzodes) => (
+                        <option value="">
+                            Válassz szerződést
+                        </option>
 
-                            <option
-                                key={
-                                    szerzodes.id
-                                }
-                                value={
-                                    szerzodes.id
-                                }
-                            >
-                                {
-                                    szerzodes.berlonev
-                                }
-                            </option>
+                        {szerzodesek.map(
+                            (szerzodes) => (
 
-                        )
-                    )}
+                                <option
+                                    key={
+                                        szerzodes.id
+                                    }
+                                    value={
+                                        szerzodes.id
+                                    }
+                                >
+                                    {
+                                        szerzodes.berlonev
+                                    }
+                                </option>
 
-                </select>
+                            )
+                        )}
 
-                <input
-                    type="number"
-                    placeholder="Összeg"
-                    value={
-                        ujFizetes.osszeg
-                    }
-                    onChange={(e) =>
-                        setUjFizetes({
-                            ...ujFizetes,
-                            osszeg:
-                                e.target.value
-                        })
-                    }
-                    required
-                />
+                    </select>
 
-                <input
-                    type="date"
-                    value={
-                        ujFizetes.fizetesdatum
-                    }
-                    onChange={(e) =>
-                        setUjFizetes({
-                            ...ujFizetes,
-                            fizetesdatum:
-                                e.target.value
-                        })
-                    }
-                    required
-                />
+                    <input
+                        type="number"
+                        placeholder="Összeg"
+                        value={
+                            ujFizetes.osszeg
+                        }
+                        onChange={(e) =>
+                            setUjFizetes({
+                                ...ujFizetes,
+                                osszeg:
+                                    e.target.value
+                            })
+                        }
+                        required
+                    />
 
-                <select
-                    value={
-                        ujFizetes.statusz
-                    }
-                    onChange={(e) =>
-                        setUjFizetes({
-                            ...ujFizetes,
-                            statusz:
-                                e.target.value
-                        })
-                    }
-                >
+                    <input
+                        type="date"
+                        value={
+                            ujFizetes.fizetesdatum
+                        }
+                        onChange={(e) =>
+                            setUjFizetes({
+                                ...ujFizetes,
+                                fizetesdatum:
+                                    e.target.value
+                            })
+                        }
+                        required
+                    />
 
-                    <option value="Teljesítve">
-                        Teljesítve
-                    </option>
+                    <select
+                        value={
+                            ujFizetes.statusz
+                        }
+                        onChange={(e) =>
+                            setUjFizetes({
+                                ...ujFizetes,
+                                statusz:
+                                    e.target.value
+                            })
+                        }
+                    >
 
-                    <option value="Függőben">
-                        Függőben
-                    </option>
+                        <option value="Teljesítve">
+                            Teljesítve
+                        </option>
 
-                    <option value="Sikertelen">
-                        Sikertelen
-                    </option>
+                        <option value="Függőben">
+                            Függőben
+                        </option>
 
-                </select>
+                        <option value="Sikertelen">
+                            Sikertelen
+                        </option>
 
-                <input
-                    type="text"
-                    placeholder="Fizetési mód"
-                    value={
-                        ujFizetes.fizetesmod
-                    }
-                    onChange={(e) =>
-                        setUjFizetes({
-                            ...ujFizetes,
-                            fizetesmod:
-                                e.target.value
-                        })
-                    }
-                    required
-                />
+                    </select>
 
-                <input
-                    type="text"
-                    placeholder="Megjegyzés"
-                    value={
-                        ujFizetes.megjegyzes
-                    }
-                    onChange={(e) =>
-                        setUjFizetes({
-                            ...ujFizetes,
-                            megjegyzes:
-                                e.target.value
-                        })
-                    }
-                />
+                    <input
+                        type="text"
+                        placeholder="Fizetési mód"
+                        value={
+                            ujFizetes.fizetesmod
+                        }
+                        onChange={(e) =>
+                            setUjFizetes({
+                                ...ujFizetes,
+                                fizetesmod:
+                                    e.target.value
+                            })
+                        }
+                        required
+                    />
 
-                <button
-                    type="submit"
-                >
-                    {
-                        szerkesztettId
-                            ? "Módosítás mentése"
-                            : "Fizetés rögzítése"
-                    }
-                </button>
+                    <input
+                        type="text"
+                        placeholder="Megjegyzés"
+                        value={
+                            ujFizetes.megjegyzes
+                        }
+                        onChange={(e) =>
+                            setUjFizetes({
+                                ...ujFizetes,
+                                megjegyzes:
+                                    e.target.value
+                            })
+                        }
+                    />
 
-            </form>
+                    <button
+                        type="submit"
+                    >
+                        {
+                            szerkesztettId
+                                ? "Módosítás mentése"
+                                : "Fizetés rögzítése"
+                        }
+                    </button>
 
+                </form>
+            )}
             <div className="filter-container">
 
                 <select
@@ -432,8 +437,8 @@ function Fizetesek() {
                                             fizetes.statusz === "Teljesítve"
                                                 ? "active-status"
                                                 : fizetes.statusz === "Függőben"
-                                                ? "pending-status"
-                                                : "expired-status"
+                                                    ? "pending-status"
+                                                    : "expired-status"
                                         }
                                     >
                                         {" "}
@@ -444,57 +449,60 @@ function Fizetesek() {
 
                                 </p>
 
-                                <div className="buttons">
+                                {user?.szerepkor === "admin" && (
 
-                                    <button
-                                        type="button"
-                                        className="edit-btn"
-                                        onClick={() => {
+                                    <div className="buttons">
 
-                                            setSzerkesztettId(
-                                                fizetes.id
-                                            );
+                                        <button
+                                            type="button"
+                                            className="edit-btn"
+                                            onClick={() => {
 
-                                            setUjFizetes({
-                                                szerzodesid:
-                                                    fizetes.szerzodesid,
-                                                osszeg:
-                                                    fizetes.osszeg,
-                                                fizetesdatum:
-                                                    fizetes.fizetesdatum?.split("T")[0] ||
-                                                    fizetes.fizetesdatum,
-                                                statusz:
-                                                    fizetes.statusz,
-                                                fizetesmod:
-                                                    fizetes.fizetesmod,
-                                                megjegyzes:
-                                                    fizetes.megjegyzes || ""
-                                            });
+                                                setSzerkesztettId(
+                                                    fizetes.id
+                                                );
 
-                                            window.scrollTo({
-                                                top: 0,
-                                                behavior: "smooth"
-                                            });
+                                                setUjFizetes({
+                                                    szerzodesid:
+                                                        fizetes.szerzodesid,
+                                                    osszeg:
+                                                        fizetes.osszeg,
+                                                    fizetesdatum:
+                                                        fizetes.fizetesdatum?.split("T")[0] ||
+                                                        fizetes.fizetesdatum,
+                                                    statusz:
+                                                        fizetes.statusz,
+                                                    fizetesmod:
+                                                        fizetes.fizetesmod,
+                                                    megjegyzes:
+                                                        fizetes.megjegyzes || ""
+                                                });
 
-                                        }}
-                                    >
-                                        Módosítás
-                                    </button>
+                                                window.scrollTo({
+                                                    top: 0,
+                                                    behavior: "smooth"
+                                                });
 
-                                    <button
-                                        type="button"
-                                        className="delete-btn"
-                                        onClick={() =>
-                                            torles(
-                                                fizetes.id
-                                            )
-                                        }
-                                    >
-                                        Törlés
-                                    </button>
+                                            }}
+                                        >
+                                            Módosítás
+                                        </button>
 
-                                </div>
+                                        <button
+                                            type="button"
+                                            className="delete-btn"
+                                            onClick={() =>
+                                                torles(
+                                                    fizetes.id
+                                                )
+                                            }
+                                        >
+                                            Törlés
+                                        </button>
 
+                                    </div>
+
+                                )}
                             </div>
 
                         )
